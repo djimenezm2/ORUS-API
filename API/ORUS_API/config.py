@@ -1,4 +1,4 @@
-﻿import os
+import os
 import sys
 
 # Get the current directory of the file.
