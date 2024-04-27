@@ -1,0 +1,13 @@
+# Ignore Python cache files
+*.pyc
+__pycache__/
+
+# Ignore log files
+api.log
+
+# Ignore text files
+*.txt
+
+# Ignore specific files and directories
+dataBase/
+python-api-example-master/
