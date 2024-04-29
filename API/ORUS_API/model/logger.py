@@ -1,12 +1,12 @@
 import os
 import logging
 
-def init(data_dir: str) -> logging.Logger:
+def init() -> logging.Logger:
     """
     This function initializes the logger.
 
     Args:
-        - data_dir (str): The path to the data directory.
+        None
 
     Returns:
         - logger (logging.Logger): The logger object.
@@ -15,6 +15,7 @@ def init(data_dir: str) -> logging.Logger:
         - None
     """
 
+    data_dir = os.environ["data_dir"] # Get the data directory from the environment variables.
     logs_dir = f"{data_dir}/logs" # The path to the logs directory.
     log_file_path = f"{data_dir}/logs/api.log"
 

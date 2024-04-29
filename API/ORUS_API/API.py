@@ -11,7 +11,7 @@ import os
 import logging
 import mysql.connector
 
-def start(app: Flask, api: Api, swagger: Swagger, data_dir: str) -> None:
+def start(app: Flask, api: Api, swagger: Swagger) -> None:
     """
     This function is the entry point for the API.
 
@@ -19,7 +19,6 @@ def start(app: Flask, api: Api, swagger: Swagger, data_dir: str) -> None:
         - app (flask.Flask): The Flask app object.
         - api (flask_restful.Api): The API object.
         - swagger (flasgger.Swagger): The Swagger object.
-        - data_dir (str): The path to the data directory.
 
     Returns:
         # TODO: Define the return type.
@@ -28,15 +27,15 @@ def start(app: Flask, api: Api, swagger: Swagger, data_dir: str) -> None:
         # TODO: Define the exceptions that are raised by this function.
     """
 
-    logs_handler = logger.init(data_dir)
-    logs_handler.info("\n" + "#" * 100 + "\n" )
+    logs_handler = logger.init()
+    logs_handler.info("\n\n" + "#" * 100 + "\n" )
     logs_handler.info("Starting the API...")
 
-    db_connection = connect_database(logs_handler, data_dir)
+    db_connection = connect_database(logs_handler)
     pass
 
 
-def connect_database(logs_handler: logging.Logger, data_dir: str) -> mysql.connector.MySQLConnection:
+def connect_database(logs_handler: logging.Logger) -> mysql.connector.MySQLConnection:
     """
     This function connects to the database.
     It sets the credentials in the environment variables and then connects to the database.
@@ -44,7 +43,6 @@ def connect_database(logs_handler: logging.Logger, data_dir: str) -> mysql.conne
 
     Args:
         - logs_handler (logging.Logger): The logger object.
-        - data_dir (str): The path to the data directory.
 
     Returns:
         - db_connection (mysql.connector.MySQLConnection): The connection object.
@@ -54,10 +52,11 @@ def connect_database(logs_handler: logging.Logger, data_dir: str) -> mysql.conne
     """
 
     logs_handler.info("Getting the credentials for de API DB user...")
-    credentials_aquired = credentials_manager.set_credentials(data_dir) # Set the credentials in the environment variables.
+    credentials_aquired = credentials_manager.set_credentials() # Set the credentials in the environment variables.
 
-    if not credentials_aquired: # If the credentials are not set successfully.
-        logs_handler.error("An error occurred while setting the credentials.")
+    if credentials_aquired is not True: # If the credentials are not set successfully.
+        logs_handler.error("An error occurred while setting the credentials. See the error below:")
+        logs_handler.error(f"Error: {credentials_aquired}")
         exit(1)
 
     else: # If the credentials are set successfully.
@@ -71,7 +70,8 @@ def connect_database(logs_handler: logging.Logger, data_dir: str) -> mysql.conne
     db_connection = db_connections.init(user, password) # Initialize the connection to the database.
 
     if type(db_connection) is mysql.connector.Error: # If there is an error in connecting to the database.
-        logs_handler.error(f"An error occurred while connecting to the database: {db_connection}")
+        logs_handler.error(f"An error occurred while connecting to the database. See the error below:")
+        logs_handler.error(f"Error: {db_connection}")
         exit(1)
 
     else:

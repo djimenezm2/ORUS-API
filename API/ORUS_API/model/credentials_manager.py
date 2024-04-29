@@ -1,11 +1,11 @@
 import os
 
-def set_credentials(data_dir: str) -> bool:
+def set_credentials() -> bool:
     """
     This function sets the credentials for the API DataBase user in the OS environment variables.
 
     Args:
-        - data_dir (str): The path to the data directory.
+        None
 
     Returns:
         - Bool: True if the credentials are set successfully, False otherwise.
@@ -14,10 +14,11 @@ def set_credentials(data_dir: str) -> bool:
         - FileNotFoundError: If the credentials file is not found.
     """
 
+    data_dir = os.environ["data_dir"] # Get the data directory from the environment variables.
     credentials = open_credentials_file(data_dir) # Open the credentials file.
 
     if type(credentials) is FileNotFoundError: # If the file is not found.
-        return False
+        return credentials
 
     else: # If the file is found.
         user = credentials.split("\n")[0] # The first line is the username.

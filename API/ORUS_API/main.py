@@ -16,4 +16,4 @@ if (__name__) == '__main__': # If the script is being run directly.
     api = Api(app) # Create the API object for the app.
     swagger = Swagger(app) # Create the Swagger object for the app.
 
-    API.start(app, api, swagger, cf.data_dir) # Start the API.
+    API.start(app, api, swagger) # Start the API.
