@@ -15,7 +15,7 @@ def init() -> logging.Logger:
         - None
     """
 
-    data_dir = os.environ["data_dir"] # Get the data directory from the environment variables.
+    data_dir = os.environ.get("data_dir") # Get the data directory from the environment variables.
     logs_dir = f"{data_dir}/logs" # The path to the logs directory.
     log_file_path = f"{data_dir}/logs/api.log"
 

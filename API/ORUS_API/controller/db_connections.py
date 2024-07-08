@@ -19,12 +19,16 @@ def init(user: str, password: str) -> mysql.connector.MySQLConnection:
 
     try: # Try to connect to the database.
         db_connection = mysql.connector.connect( # Connect to the database.
-            host = "localhost",
+            host = "127.0.0.1",
             user = user,
             password = password
         )
 
-        return db_connection
+        if db_connection.is_connected():
+            return db_connection
+
+        else:
+            raise mysql.connector.Error("Error in connecting to the database.")
 
     except mysql.connector.Error as error: # If there is an error in connecting to the database.
         return error
