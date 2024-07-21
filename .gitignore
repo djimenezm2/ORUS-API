@@ -5,8 +5,9 @@ __pycache__/
 # Ignore log files
 api.log
 
-# Ignore text files
+# Ignore text and json files
 *.txt
+*.json
 
 # Ignore specific files and directories
 dataBase/
