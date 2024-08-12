@@ -30,7 +30,7 @@ def parse_data(data_json: str) -> dict:
     except Exception as error:
         raise error
 
-def check_data(db_tables, data_json):
+def check_data(db_tables, data_json) -> None:
     """
     This function confirms that the keys and values are valid for the DB tables format.
 

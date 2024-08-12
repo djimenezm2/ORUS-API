@@ -1,14 +1,13 @@
 # Importing all the required modules
 from connections import broker_connections, db_connections, web_connections
 from utils import credentials_manager, logs_handler, data_checker, args_checker
-
 # Importing the required libraries
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from flasgger import Swagger
+import paho.mqtt
 import logging
 import mysql.connector
-from datetime import datetime
 import os
 
 def start(app: Flask, api: Api, swagger: Swagger) -> None:
@@ -84,7 +83,7 @@ def connect_database(logger: logging.Logger) -> mysql.connector.MySQLConnection:
 
         exit(1)
 
-def connect_broker(logger: logging.Logger):
+def connect_broker(logger: logging.Logger) -> paho.mqtt.client.Client:
     """
     This function connects to the broker mqtt.
     It sets the credentials in the environment variables and then connects to the broker mqtt.
@@ -125,7 +124,7 @@ def start_web_services(logger: logging.Logger, app: Flask, api: Api, swagger: Sw
     """
 
     @app.route("/OrusDashboard/API", methods = ["GET"])
-    def execute_request():
+    def execute_request() -> jsonify:
         table_id = request.args.get("table_id") # Get the table id from the request.
         start_date = request.args.get("start_date") # Get the start date from the request.
         end_date = request.args.get("end_date") # Get the end date from the request.
@@ -223,7 +222,7 @@ def set_db_tables(logger: logging.Logger) -> None:
         logger.error(f"An error occurred while setting the tables in the environment variables. See the error below:")
         logger.error(f"Error: {error}")
 
-def broker_on_message(client, userdata, message):
+def broker_on_message(client, userdata, message) -> None:
     """
     This function is called by the mqtt client thread when a new message is received from the broker.
 

@@ -44,7 +44,7 @@ def init() -> mysql.connector.MySQLConnection:
     except mysql.connector.Error as error: # If there is an error in connecting to the database.
         raise error
 
-def close(db_connection: mysql.connector.MySQLConnection, db_cursor: mysql.connector.cursor):
+def close(db_connection: mysql.connector.MySQLConnection, db_cursor: mysql.connector.cursor) -> None:
     """
     This function closes the connection to the database.
 
@@ -66,7 +66,7 @@ def close(db_connection: mysql.connector.MySQLConnection, db_cursor: mysql.conne
     except Exception as error: # If there is an error in closing the connection to the database.
         raise error
 
-def write_data(db_cursor: mysql.connector.cursor, data: dict):
+def write_data(db_cursor: mysql.connector.cursor, data: dict) -> None:
     """
     This function writes the data to the database.
 
@@ -104,7 +104,7 @@ def write_data(db_cursor: mysql.connector.cursor, data: dict):
     except Exception as error: # If there is an error in writing the data to the database.
         raise error
 
-def execute(db_cursor: mysql.connector.cursor, query: str):
+def execute(db_cursor: mysql.connector.cursor, query: str) -> list:
     """
     This function executes the query on the database.
 
