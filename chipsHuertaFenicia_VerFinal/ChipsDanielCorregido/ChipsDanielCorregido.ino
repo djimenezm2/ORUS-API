@@ -212,16 +212,16 @@ void loop () {
   // Create JSON object with sensor values to publish
   StaticJsonDocument<200> doc;
   doc["CLIENT_ID"] = CLIENT_ID;
-  doc["ambientTemperature"] = ambientTemp;
-  doc["ambientMouisture"] = ambientMoisture;
-  doc["soilMoisture"] = soilMoisturePercentage;
+  doc["ambient_temperature"] = ambientTemp;
+  doc["ambient_moisture"] = ambientMoisture;
+  doc["soil_moisture"] = soilMoisturePercentage;
 
   // Convert JSON object into a string
   char buffer[256];
   serializeJson(doc, buffer);
 
   // Publish JSON string
-  publishToMQTTBroker("CROPPER", buffer); // Publish data to MQTT Broker
+  publishToMQTTBroker("ORUS", buffer); // Publish data to MQTT Broker
   mqttClient.loop(); // Keep MQTT Broker connection alive
 
   Serial.println("\nWaiting for " + (String)(SLEEP_TIME / 60000) + " mins.");
