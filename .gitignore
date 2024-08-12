@@ -8,6 +8,3 @@ api.log
 # Ignore text and json files
 *.txt
 *.json
-
-# Ignore specific files and directories
-dataBase/
