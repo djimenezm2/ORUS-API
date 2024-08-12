@@ -1,20 +1,23 @@
 import json
 from datetime import datetime
-from model import logs_handler as logs_handler
+from utils import logs_handler as logs_handler
+import os
 
-def parse_data(data_json: str, db_tables: list) -> dict:
+def parse_data(data_json: str) -> dict:
     """
     This function parses the data received from the MQTT broker.
 
     Args:
         - data_json (str): The data received from the MQTT broker.
-        - db_tables (list): The tables for the database.
 
     Returns:
         - data (dict): The data parsed as a dictionary.
     """
 
     try:
+        API_DB_TABLES = os.environ.get("API_DB_TABLES") # Get the tables from the environment variables.
+        db_tables = API_DB_TABLES.split() # Split the tables into a list.
+
         data_json = json.loads(data_json) # Parse the data to a dictionary.
 
         check_data(db_tables, data_json) # Confirm the keys for the database.

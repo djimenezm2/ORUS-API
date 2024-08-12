@@ -90,7 +90,7 @@ def open_credentials_file(data_dir: str) -> str:
         - str: The contents of the credentials file.
 
     Raises:
-        - Exception: If there is an error in opening the file.
+        - Exception: If there is an error while opening the file.
     """
 
     credentials_file_path = f"{data_dir}/credentials.json" # The path to the credentials file.

@@ -1,9 +1,8 @@
-# Importing the config file
+# Importing the required libraries
 import config as cf
 assert cf
 
-# Importing the required libraries
-from flask import Flask, jsonify, request
+from flask import Flask
 from flask_restful import Api, Resource
 from flasgger import Swagger
 

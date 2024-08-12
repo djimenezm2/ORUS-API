@@ -1,5 +1,5 @@
 # Importing the required libraries
-from model import logs_handler
+from utils import logs_handler
 
 import mysql.connector
 import os
@@ -42,6 +42,28 @@ def init() -> mysql.connector.MySQLConnection:
             raise mysql.connector.Error("Error in connecting to the database.")
 
     except mysql.connector.Error as error: # If there is an error in connecting to the database.
+        raise error
+
+def close(db_connection: mysql.connector.MySQLConnection, db_cursor: mysql.connector.cursor):
+    """
+    This function closes the connection to the database.
+
+    Args:
+        - db_connection (mysql.connector.MySQLConnection): The connection object.
+        - db_cursor (mysql.connector.cursor): The cursor object.
+
+    Returns:
+        - None
+
+    Raises:
+        - Exception: If there is an unexpected error.
+    """
+
+    try: # Try to close the connection to the database.
+        db_cursor.close() # Close the cursor object.
+        db_connection.close() # Close the connection object.
+
+    except Exception as error: # If there is an error in closing the connection to the database.
         raise error
 
 def write_data(db_cursor: mysql.connector.cursor, data: dict):

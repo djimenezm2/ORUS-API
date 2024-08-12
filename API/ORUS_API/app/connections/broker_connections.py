@@ -1,7 +1,7 @@
 from paho.mqtt import client as mqtt
 import time
 import threading
-from model import data_manager
+from utils import data_checker
 import os
 
 def init(broker_on_message: callable) -> mqtt.Client:
@@ -43,4 +43,4 @@ def init(broker_on_message: callable) -> mqtt.Client:
             return mqtt_client
 
     except Exception as error: # If there is an error in connecting to the broker server.
-        return error
+        raise error
