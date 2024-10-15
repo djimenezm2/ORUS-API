@@ -6,7 +6,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto implementa una solución integral para la gestión y almacenamiento de datos provenientes de sensores IoT. La solución consta de tres componentes principales: una API, un bróker MQTT y una base de datos. Estos elementos trabajan en conjunto para proporcionar un servicio seguro y eficiente para acceder a los datos a través de internet.
+Este proyecto implementa una solución integral para la gestión y almacenamiento de datos provenientes de sensores IoT que hacen parte de el proyecto de renovación de la huerta Fenicia de la Universidad de los Andes, los cuales monitorean de manera constante distintos aspectos del ambiente en el que se encuentran ubicados, como la temperatura y la humedad del aire, así como la humedad del suelo. La solución propuesta permite a los usuarios acceder a los datos de manera segura y eficiente a través de una API REST, la cual se conecta a un bróker MQTT para recibir los mensajes enviados por los sensores y los almacena en una base de datos MySQL para su posterior consulta.
 
 # Componentes del Proyecto
 
